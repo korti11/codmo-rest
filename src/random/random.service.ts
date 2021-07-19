@@ -6,7 +6,6 @@ export class RandomService {
 
     getYesOrNoMessage(param: YesNoMessageQuery): string {
         const prediction = Math.floor((Math.random() * 101));
-        console.log(`Prediction: ${prediction}`);
         if(prediction >= param.chances) {
             return param.yes.replace('<value>', prediction.toString());
         } else {
