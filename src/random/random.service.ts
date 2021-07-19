@@ -5,12 +5,12 @@ import { YesNoMessageQuery } from './yes-no-message.query';
 export class RandomService {
 
     getYesOrNoMessage(param: YesNoMessageQuery): string {
-        const prediction = Math.floor((Math.random() * 101) + 1);
+        const prediction = Math.floor((Math.random() * 101));
         console.log(`Prediction: ${prediction}`);
-        if(prediction <= param.chances) {
-            return param.yes;
+        if(prediction >= param.chances) {
+            return param.yes.replace('{value}', prediction.toString());
         } else {
-            return param.no;
+            return param.no.replace('{value}', prediction.toString());
         }
     }
 

@@ -4,13 +4,13 @@ import { Type } from 'class-transformer';
 export class YesNoMessageQuery {
     @IsOptional()
     @IsString()
-    @Matches(/^(\w|\d|\s|:)+$/)
+    @Matches(/^(\w|\d|\s|:|{value})+$/)
     @MaxLength(50)
     yes: string = 'yes';
 
     @IsOptional()
     @IsString()
-    @Matches(/^(\w|\d|\s|:)+$/)
+    @Matches(/^(\w|\d|\s|:|{value})+$/)
     @MaxLength(50)
     no: string = 'no';
 
