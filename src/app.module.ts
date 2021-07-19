@@ -1,10 +1,23 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { RandomController } from './random/random.controller';
 import { RandomService } from './random/random.service';
 
 @Module({
-  imports: [],
+  imports: [
+    ThrottlerModule.forRoot({
+        ttl: 60,
+        limit: 30
+      })
+  ],
   controllers: [RandomController],
-  providers: [RandomService],
+  providers: [
+    RandomService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard
+    }
+  ],
 })
 export class AppModule {}
