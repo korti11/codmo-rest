@@ -8,9 +8,9 @@ export class RandomService {
         const prediction = Math.floor((Math.random() * 101));
         console.log(`Prediction: ${prediction}`);
         if(prediction >= param.chances) {
-            return param.yes.replace('{value}', prediction.toString());
+            return param.yes.replace('<value>', prediction.toString());
         } else {
-            return param.no.replace('{value}', prediction.toString());
+            return param.no.replace('<value>', prediction.toString());
         }
     }
 
