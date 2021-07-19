@@ -1,4 +1,5 @@
-import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
+import { Controller, Get, Header, ParseIntPipe, Query } from '@nestjs/common';
+import { RandomService } from './random.service';
 import { YesNoMessageQuery } from './yes-no-message.query';
 
 @Controller({
@@ -7,10 +8,12 @@ import { YesNoMessageQuery } from './yes-no-message.query';
 })
 export class RandomController {
 
-    @Get('yes-no')
-    getYesNoMessage(@Query() queryParams: YesNoMessageQuery) : string {
-        return `Yes message: ${queryParams.yes}, No message: ${queryParams.no}, Chances: ${queryParams.chances}`
-    }
+    constructor(private service: RandomService) { }
 
+    @Get('yes-no')
+    @Header('Cache-Control', 'none')
+    getYesNoMessage(@Query() queryParams: YesNoMessageQuery) : string {
+        return this.service.getYesOrNoMessage(queryParams);
+    }
 
 }
