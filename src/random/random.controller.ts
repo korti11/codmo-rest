@@ -1,6 +1,6 @@
 import { Controller, Get, Header, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { RandomService } from './random.service';
-import { YesNoMessageQuery } from './yes-no-message.query';
+import { RandomMessageQuery, YesNoMessageQuery } from './query.paramters';
 
 @Controller({
     path: 'random',
@@ -14,6 +14,12 @@ export class RandomController {
     @Header('Cache-Control', 'none')
     getYesNoMessage(@Query() queryParams: YesNoMessageQuery) : string {
         return this.service.getYesOrNoMessage(queryParams);
+    }
+
+    @Get('message')
+    @Header('Cache-Control', 'none')
+    getRandomMessage(@Query() queryParams: RandomMessageQuery) : string {
+        return this.service.getRandomMessage(queryParams);
     }
 
     @Get('random-chatter/:channel')
