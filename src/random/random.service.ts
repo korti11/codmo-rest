@@ -4,7 +4,7 @@ import { AxiosResponse } from 'axios';
 import { Cache } from 'cache-manager';
 import { Observable } from 'rxjs';
 import { ChatterList, Chatters } from 'src/entities';
-import { YesNoMessageQuery } from './yes-no-message.query';
+import { RandomMessageQuery, YesNoMessageQuery } from './query.paramters';
 
 @Injectable()
 export class RandomService {
@@ -13,13 +13,24 @@ export class RandomService {
     constructor(private httpService: HttpService,
         @Inject(CACHE_MANAGER) private cache: Cache) {}
 
+    private randomNumber(max: number, min: number = 0): number {
+        return Math.floor(Math.random() * max) + min;
+    } 
+
+
     getYesOrNoMessage(param: YesNoMessageQuery): string {
-        const prediction = Math.floor((Math.random() * 101));
+        const prediction = this.randomNumber(101);
         if(prediction >= param.chances) {
             return param.yes.replace('<value>', prediction.toString());
         } else {
             return param.no.replace('<value>', prediction.toString());
         }
+    }
+
+    getRandomMessage(param: RandomMessageQuery) {
+        const messages = param.messages.split(';');
+        const index = this.randomNumber(messages.length);
+        return messages[index];
     }
 
     async getRandomChatter(channel: string): Promise<string> {

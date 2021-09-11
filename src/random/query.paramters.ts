@@ -1,4 +1,4 @@
-import { IsString, IsInt, Min, Max, Matches, MinLength, MaxLength, IsOptional } from 'class-validator';
+import { IsString, IsAscii, IsInt, Min, Max, Matches, MinLength, MaxLength, IsOptional } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class YesNoMessageQuery {
@@ -20,4 +20,10 @@ export class YesNoMessageQuery {
     @Max(100)
     @Type(() => Number)
     chances: number = 50;
+}
+
+export class RandomMessageQuery {
+    @IsString()
+    @IsAscii()
+    messages: string;
 }
