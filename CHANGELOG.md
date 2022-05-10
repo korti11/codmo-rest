@@ -1,4 +1,10 @@
 # Changelog
+## Version 0.3.2 - 10. May 2022
+### Security updates
+- Updated dependency @nestjs/axios from 0.0.3 to 0.0.7
+- Updated dependency minimist from 1.2.5 to 1.2.6
+- Updated dependency follow-redirects from 1.14.6 to 1.14.8
+- Updated dependency shelljs from 0.8.4 to 0.8.5
 ## Version 0.3.1 - 02. Jan 2022
 ### Security updates
 - Updated dependency @nestjs/axios from 0.0.1 to 0.0.3
